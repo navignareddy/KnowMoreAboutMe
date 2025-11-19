@@ -29,6 +29,8 @@ export interface ImageData {
   alt: string;
   title?: string;
   description?: string;
+  href?: string;
+  label?: string;
 }
 
 export interface SphereImageGridProps {
@@ -379,10 +381,18 @@ const SphereImageGrid: React.FC<SphereImageGridProps> = ({
     const isHovered = hoveredIndex === index;
     const finalScale = isHovered ? Math.min(1.2, 1.2 / position.scale) : 1;
 
+    const handleClick = (e: React.MouseEvent) => {
+      if (image.href) {
+        window.location.href = image.href;
+      } else {
+        setSelectedImage(image);
+      }
+    };
+
     return (
       <div
         key={image.id}
-        className="absolute cursor-pointer select-none transition-transform duration-200 ease-out"
+        className="absolute cursor-pointer select-none transition-transform duration-200 ease-out group"
         style={{
           width: `${imageSize}px`,
           height: `${imageSize}px`,
@@ -394,7 +404,7 @@ const SphereImageGrid: React.FC<SphereImageGridProps> = ({
         }}
         onMouseEnter={() => setHoveredIndex(index)}
         onMouseLeave={() => setHoveredIndex(null)}
-        onClick={() => setSelectedImage(image)}
+        onClick={handleClick}
       >
         <div className="relative w-full h-full rounded-full overflow-hidden shadow-lg border-2 border-white/20">
           <img
@@ -405,6 +415,14 @@ const SphereImageGrid: React.FC<SphereImageGridProps> = ({
             loading={index < 3 ? 'eager' : 'lazy'}
           />
         </div>
+        {/* Hover Label */}
+        {isHovered && image.label && (
+          <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap pointer-events-none z-50">
+            <div className="px-3 py-1.5 bg-black/80 backdrop-blur-sm text-white text-sm font-medium rounded-lg shadow-lg">
+              {image.label}
+            </div>
+          </div>
+        )}
       </div>
     );
   }, [worldPositions, baseImageSize, containerSize, hoveredIndex]);

@@ -6,16 +6,16 @@ import Link from "next/link";
 import SphereImageGrid, { type ImageData } from "@/components/sphere-image-grid";
 
 const sampleImages: ImageData[] = [
-  { id: "1", src: "https://picsum.photos/seed/1/400/400", alt: "Project 1" },
-  { id: "2", src: "https://picsum.photos/seed/2/400/400", alt: "Project 2" },
-  { id: "3", src: "https://picsum.photos/seed/3/400/400", alt: "Project 3" },
-  { id: "4", src: "https://picsum.photos/seed/4/400/400", alt: "Project 4" },
-  { id: "5", src: "https://picsum.photos/seed/5/400/400", alt: "Project 5" },
-  { id: "6", src: "https://picsum.photos/seed/6/400/400", alt: "Project 6" },
-  { id: "7", src: "https://picsum.photos/seed/7/400/400", alt: "Project 7" },
-  { id: "8", src: "https://picsum.photos/seed/8/400/400", alt: "Project 8" },
-  { id: "9", src: "https://picsum.photos/seed/9/400/400", alt: "Project 9" },
-  { id: "10", src: "https://picsum.photos/seed/10/400/400", alt: "Project 10" },
+  { id: "1", src: "https://picsum.photos/seed/1/400/400", alt: "Home", href: "/", label: "Home" },
+  { id: "2", src: "https://picsum.photos/seed/2/400/400", alt: "About", href: "/about", label: "About" },
+  { id: "3", src: "https://picsum.photos/seed/3/400/400", alt: "Projects", href: "/projects", label: "Projects" },
+  { id: "4", src: "https://picsum.photos/seed/4/400/400", alt: "Experience", href: "/experience", label: "Experience" },
+  { id: "5", src: "https://picsum.photos/seed/5/400/400", alt: "Research", href: "/projects", label: "Research" },
+  { id: "6", src: "https://picsum.photos/seed/6/400/400", alt: "Education", href: "/education", label: "Education" },
+  { id: "7", src: "https://picsum.photos/seed/7/400/400", alt: "Skills", href: "/skills", label: "Skills" },
+  { id: "8", src: "https://picsum.photos/seed/8/400/400", alt: "Certifications", href: "/certifications", label: "Certifications" },
+  { id: "9", src: "https://picsum.photos/seed/9/400/400", alt: "Leadership", href: "/leadership", label: "Leadership" },
+  { id: "10", src: "https://picsum.photos/seed/10/400/400", alt: "Contact", href: "/contact", label: "Contact" },
 ];
 
 export default function Home() {

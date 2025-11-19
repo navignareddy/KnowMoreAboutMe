@@ -6,7 +6,7 @@ interface CursorProps {
   size?: number;
 }
 
-export const Cursor: React.FC<CursorProps> = ({ size = 60 }) => {
+export const Cursor: React.FC<CursorProps> = ({ size = 40 }) => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const requestRef = useRef<number>();
   const previousPos = useRef({ x: -size, y: -size });
