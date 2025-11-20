@@ -392,13 +392,15 @@ const SphereImageGrid: React.FC<SphereImageGridProps> = ({
       e.preventDefault();
       e.stopPropagation();
       
-      if (image.href) {
+      const targetHref = typeof image.href === 'string' && image.href.length > 0 ? image.href : null;
+      
+      if (targetHref) {
         setClickedIndex(index);
         setIsNavigating(true);
         
         // Add smooth transition effect with visual feedback
         setTimeout(() => {
-          router.push(image.href);
+          router.push(targetHref);
           // Reset states after navigation
           setTimeout(() => {
             setClickedIndex(null);
