@@ -63,18 +63,18 @@ export default function About() {
                 <p className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Let's connect!</p>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <a 
-                    href="mailto:gnavignareddy@gmail.com" 
+                    href="mailto:nagnguma@asu.edu" 
                     className="flex items-center gap-2 text-sm sm:text-base text-primary hover:underline break-all sm:break-normal"
                   >
                     <Mail className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
-                    <span>gnavignareddy@gmail.com</span>
+                    <span>nagnguma@asu.edu</span>
                   </a>
                   <a 
-                    href="mailto:nganguma@asu.edu" 
+                    href="mailto:nagnguma@asu.edu" 
                     className="flex items-center gap-2 text-sm sm:text-base text-primary hover:underline break-all sm:break-normal"
                   >
                     <Mail className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
-                    <span>nganguma@asu.edu</span>
+                    <span>nagnguma@asu.edu</span>
                   </a>
                 </div>
               </div>

@@ -143,19 +143,19 @@ export default function Dashboard() {
               <MagneticDock>
                 <DockIcon
                   icon={<Github className="h-5 w-5" />}
-                  href="https://github.com"
+                  href="https://github.com/navignareddy"
                 />
                 <DockIcon
                   icon={<Linkedin className="h-5 w-5" />}
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/navignareddy/"
                 />
                 <DockIcon
                   icon={<Twitter className="h-5 w-5" />}
-                  href="https://twitter.com"
+                  href="https://twitter.com/navignareddy"
                 />
                 <DockIcon
                   icon={<Mail className="h-5 w-5" />}
-                  href="mailto:placeholder@example.com"
+                  href="mailto:nagnguma@asu.edu"
                 />
               </MagneticDock>
             </div>

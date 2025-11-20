@@ -8,7 +8,7 @@ const contactLinks = [
   {
     icon: <Linkedin className="h-6 w-6" />,
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/navignareddy/?trk=opento_sprofile_details",
+    href: "https://www.linkedin.com/in/navignareddy/",
     color: "text-blue-500",
     bgColor: "bg-blue-500/10",
   },
@@ -29,7 +29,7 @@ const contactLinks = [
   {
     icon: <Mail className="h-6 w-6" />,
     label: "Email",
-    href: "mailto:gnavignareddy@gmail.com",
+    href: "mailto:nagnguma@asu.edu",
     color: "text-red-500",
     bgColor: "bg-red-500/10",
   },
@@ -80,8 +80,8 @@ export default function Contact() {
                   <Mail className="h-5 w-5 text-primary" />
                   <div className="min-w-0 flex-1">
                     <p className="text-xs sm:text-sm text-muted-foreground">Email</p>
-                    <a href="mailto:gnavignareddy@gmail.com" className="text-sm sm:text-base hover:underline break-all sm:break-normal">
-                      gnavignareddy@gmail.com
+                      <a href="mailto:nagnguma@asu.edu" className="text-sm sm:text-base hover:underline break-all sm:break-normal">
+                        nagnguma@asu.edu
                     </a>
                   </div>
                 </div>
@@ -90,8 +90,8 @@ export default function Contact() {
                   <Mail className="h-5 w-5 text-primary" />
                   <div>
                     <p className="text-sm text-muted-foreground">School Email</p>
-                    <a href="mailto:nganguma@asu.edu" className="hover:underline">
-                      nganguma@asu.edu
+                      <a href="mailto:nagnguma@asu.edu" className="hover:underline">
+                        nagnguma@asu.edu
                     </a>
                   </div>
                 </div>
