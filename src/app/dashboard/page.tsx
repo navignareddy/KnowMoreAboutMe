@@ -3,7 +3,6 @@
 import { Navigation } from "@/components/navigation";
 import { MagneticDock, DockIcon } from "@/components/ui/magnetic-dock";
 import { OrbitCarousel } from "@/components/ui/orbit-carousel";
-import { CircularGallery } from "@/components/circular-gallery";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Twitter, Mail, ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -41,43 +40,6 @@ const orbitImages = [
     url: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=400&fit=crop&q=80", 
     label: "Academic Projects", // Coursework, university assignments, academic projects
     category: "academic"
-  },
-];
-
-/**
- * FEATURED PROJECTS (Circular Gallery)
- * 
- * Specific projects with GitHub links.
- * Each item should have:
- * - image: Screenshot or visual representation of the project
- * - text: Project name
- * - githubUrl: GitHub repository URL (will open on click)
- */
-const galleryItems = [
-  { 
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop", 
-    text: "[Replace: Project Name 1]",
-    githubUrl: "https://github.com/yourusername/project1" // Replace with actual GitHub URL
-  },
-  { 
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop", 
-    text: "[Replace: Project Name 2]",
-    githubUrl: "https://github.com/yourusername/project2" // Replace with actual GitHub URL
-  },
-  { 
-    image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop", 
-    text: "[Replace: Project Name 3]",
-    githubUrl: "https://github.com/yourusername/project3" // Replace with actual GitHub URL
-  },
-  { 
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop", 
-    text: "[Replace: Project Name 4]",
-    githubUrl: "https://github.com/yourusername/project4" // Replace with actual GitHub URL
-  },
-  { 
-    image: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=800&h=600&fit=crop", 
-    text: "[Replace: Project Name 5]",
-    githubUrl: "https://github.com/yourusername/project5" // Replace with actual GitHub URL
   },
 ];
 
@@ -139,43 +101,6 @@ export default function Dashboard() {
           </div>
           <p className="text-sm text-muted-foreground text-center mt-4 italic">
             💡 Tip: Click on any category to explore related projects
-          </p>
-        </motion.section>
-
-        {/* Circular Gallery - Featured Projects */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="py-8"
-        >
-          <div className="text-center mb-6">
-            <h2 className="text-3xl font-bold mb-3">Featured Projects</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Specific projects I've completed - Real work with actual results and screenshots
-            </p>
-          </div>
-          <div className="bg-gradient-to-br from-background via-card/30 to-background border border-border/50 rounded-2xl overflow-hidden shadow-2xl relative">
-            {/* Decorative gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 pointer-events-none z-10" />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/10 to-transparent pointer-events-none z-10" />
-            
-            <div className="h-[600px] relative z-0">
-              <CircularGallery
-                items={galleryItems}
-                bend={3}
-                borderRadius={0.05}
-                scrollSpeed={2}
-                scrollEase={0.05}
-                className="relative"
-              />
-            </div>
-            
-            {/* Subtle border glow effect */}
-            <div className="absolute inset-0 rounded-2xl border border-white/5 pointer-events-none z-10" />
-          </div>
-          <p className="text-sm text-muted-foreground text-center mt-4 italic">
-            💡 Tip: Click on any project to view it on GitHub • Scroll horizontally to browse
           </p>
         </motion.section>
 

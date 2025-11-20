@@ -2,8 +2,7 @@
 
 import { Navigation } from "@/components/navigation";
 import { motion } from "framer-motion";
-import { BookOpen, TrendingUp, FolderKanban, ExternalLink, Github, Briefcase, GraduationCap } from "lucide-react";
-import { CircularGallery } from "@/components/circular-gallery";
+import { BookOpen, TrendingUp, FolderKanban, Briefcase, GraduationCap } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
 
@@ -326,17 +325,6 @@ function ProjectsContent() {
             ))}
           </div>
 
-          {/* Circular Gallery */}
-          <div className="mb-16 h-[600px]">
-            <CircularGallery
-              items={[
-                { image: "https://picsum.photos/seed/1/800/600", text: "Featured Project 1" },
-                { image: "https://picsum.photos/seed/2/800/600", text: "Featured Project 2" },
-                { image: "https://picsum.photos/seed/3/800/600", text: "Featured Project 3" },
-              ]}
-            />
-          </div>
-
           {/* Project Sections */}
           {filteredSections.map((section, sectionIndex) => (
             <motion.div
@@ -396,23 +384,6 @@ function ProjectsContent() {
                           {tech}
                         </span>
                       ))}
-                    </div>
-
-                    <div className="flex gap-3 mt-auto pt-2 border-t border-border">
-                      <a
-                        href={project.link}
-                        className="flex items-center gap-2 text-primary hover:underline text-sm"
-                      >
-                        <ExternalLink className="h-4 w-4" />
-                        View Project
-                      </a>
-                      <a
-                        href={project.github}
-                        className="flex items-center gap-2 text-muted-foreground hover:text-foreground text-sm"
-                      >
-                        <Github className="h-4 w-4" />
-                        Code
-                      </a>
                     </div>
                   </motion.div>
                 ))}
