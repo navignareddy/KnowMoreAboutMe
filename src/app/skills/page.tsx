@@ -97,7 +97,7 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <main className="min-h-screen bg-background pt-32 pb-20 px-4">
+    <main className="min-h-screen bg-background pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6">
       <Navigation />
       
       <div className="max-w-6xl mx-auto">
@@ -106,33 +106,33 @@ export default function Skills() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="flex items-center gap-4 mb-12">
-            <Code className="h-8 w-8 text-primary" />
-            <h1 className="text-5xl font-bold">Technical Skills</h1>
+          <div className="flex items-center gap-3 sm:gap-4 mb-8 sm:mb-10 md:mb-12">
+            <Code className="h-6 w-6 sm:h-8 sm:w-8 text-primary flex-shrink-0" />
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">Technical Skills</h1>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {skillCategories.map((category, categoryIndex) => (
               <motion.div
                 key={categoryIndex}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
-                className="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-all hover:scale-105"
+                className="bg-card border border-border rounded-xl p-4 sm:p-5 md:p-6 hover:shadow-lg transition-all hover:scale-[1.02] sm:hover:scale-105"
               >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className={category.color || "text-primary"}>{category.icon}</div>
-                  <h2 className="text-xl font-bold">{category.title}</h2>
+                <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                  <div className={`flex-shrink-0 ${category.color || "text-primary"}`}>{category.icon}</div>
+                  <h2 className="text-lg sm:text-xl font-bold break-words">{category.title}</h2>
                 </div>
                 
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {category.skills.map((skill, skillIndex) => (
                     <motion.span
                       key={skillIndex}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.3, delay: categoryIndex * 0.1 + skillIndex * 0.02 }}
-                      className="px-3 py-1.5 bg-primary/10 text-primary border border-primary/20 rounded-lg text-sm font-medium hover:bg-primary/20 transition-colors"
+                      className="px-2 sm:px-3 py-1 sm:py-1.5 bg-primary/10 text-primary border border-primary/20 rounded-lg text-xs sm:text-sm font-medium hover:bg-primary/20 transition-colors"
                     >
                       {skill}
                     </motion.span>

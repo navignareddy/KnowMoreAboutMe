@@ -270,7 +270,7 @@ function ProjectsContent() {
     : projectSections;
 
   return (
-    <main className="min-h-screen bg-background pt-32 pb-20 px-4">
+    <main className="min-h-screen bg-background pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6">
       <Navigation />
       
       <div className="max-w-7xl mx-auto">
@@ -279,12 +279,12 @@ function ProjectsContent() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="flex items-center gap-4 mb-12">
-            <FolderKanban className="h-8 w-8 text-primary" />
-            <div>
-              <h1 className="text-5xl font-bold">Projects</h1>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mb-8 sm:mb-10 md:mb-12">
+            <FolderKanban className="h-6 w-6 sm:h-8 sm:w-8 text-primary flex-shrink-0" />
+            <div className="min-w-0">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">Projects</h1>
               {selectedCategory && (
-                <p className="text-muted-foreground mt-2">
+                <p className="text-sm sm:text-base text-muted-foreground mt-1 sm:mt-2">
                   Showing: {projectSections.find((s) => s.category === selectedCategory)?.title}
                 </p>
               )}
@@ -292,12 +292,12 @@ function ProjectsContent() {
           </div>
 
           {/* Category Filter Pills */}
-          <div className="flex flex-wrap gap-3 mb-8">
+          <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
             <motion.button
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               onClick={() => setSelectedCategory(null)}
-              className={`px-4 py-2 rounded-full border transition-all ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm rounded-full border transition-all ${
                 !selectedCategory
                   ? "bg-primary text-primary-foreground border-primary"
                   : "bg-card border-border hover:border-primary/50"
@@ -311,16 +311,16 @@ function ProjectsContent() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 onClick={() => setSelectedCategory(section.category!)}
-                className={`px-4 py-2 rounded-full border transition-all flex items-center gap-2 ${
+                className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm rounded-full border transition-all flex items-center gap-1.5 sm:gap-2 ${
                   selectedCategory === section.category
                     ? `${section.color.replace("text-", "bg-")} text-white border-transparent`
                     : "bg-card border-border hover:border-primary/50"
                 }`}
               >
-                <span className={selectedCategory === section.category ? "" : section.color}>
+                <span className={`flex-shrink-0 ${selectedCategory === section.category ? "" : section.color}`}>
                   {section.icon}
                 </span>
-                {section.title}
+                <span className="whitespace-nowrap">{section.title}</span>
               </motion.button>
             ))}
           </div>
@@ -333,26 +333,26 @@ function ProjectsContent() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: sectionIndex * 0.2 }}
-              className="mb-16 scroll-mt-32"
+              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 sm:scroll-mt-28 md:scroll-mt-32"
             >
-              <div className="flex items-center gap-3 mb-8">
-                <div className={section.color}>{section.icon}</div>
-                <h2 className="text-3xl font-bold">{section.title}</h2>
+              <div className="flex items-center gap-2 sm:gap-3 mb-6 sm:mb-8">
+                <div className={`flex-shrink-0 ${section.color}`}>{section.icon}</div>
+                <h2 className="text-2xl sm:text-3xl font-bold">{section.title}</h2>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {section.projects.map((project, projectIndex) => (
                   <motion.div
                     key={projectIndex}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5, delay: projectIndex * 0.1 }}
-                    className="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-all hover:scale-105 flex flex-col"
+                    className="bg-card border border-border rounded-xl p-4 sm:p-5 md:p-6 hover:shadow-lg transition-all hover:scale-[1.02] sm:hover:scale-105 flex flex-col"
                   >
-                    <div className="flex justify-between items-start mb-2 gap-2">
-                      <h3 className="text-xl font-bold flex-1">{project.title}</h3>
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-2">
+                      <h3 className="text-lg sm:text-xl font-bold flex-1 break-words">{project.title}</h3>
                       {(project as any).date && (
-                        <span className="px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded whitespace-nowrap flex-shrink-0">
+                        <span className="px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded whitespace-nowrap flex-shrink-0 self-start sm:self-auto">
                           {(project as any).date}
                         </span>
                       )}

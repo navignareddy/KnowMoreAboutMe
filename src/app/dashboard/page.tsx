@@ -45,36 +45,36 @@ const orbitImages = [
 
 export default function Dashboard() {
   return (
-    <main className="min-h-screen bg-background pt-32 pb-20 px-4">
+    <main className="min-h-screen bg-background pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6">
       <Navigation />
 
       {/* Back to Home Button */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-7xl mx-auto mb-12 pt-4"
+        className="max-w-7xl mx-auto mb-8 sm:mb-10 md:mb-12 pt-2 sm:pt-4"
       >
         <Link
           href="/"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-lg hover:bg-accent transition-colors"
+          className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base bg-card border border-border rounded-lg hover:bg-accent transition-colors"
         >
-          <ArrowLeft className="h-4 w-4" />
+          <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
           <span>Back to Home</span>
         </Link>
       </motion.div>
 
-      <div className="max-w-7xl mx-auto space-y-20">
+      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16 md:space-y-20">
         {/* Hero Section */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center space-y-6"
+          className="text-center space-y-4 sm:space-y-6"
         >
-          <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent px-2">
             Explore My Work
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto px-2">
             Interactive portfolio showcasing projects, skills, and achievements
           </p>
         </motion.section>
@@ -84,15 +84,15 @@ export default function Dashboard() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="py-8"
+          className="py-6 sm:py-8"
         >
-          <div className="text-center mb-6">
-            <h2 className="text-3xl font-bold mb-3">Project Categories</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+          <div className="text-center mb-4 sm:mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-3">Project Categories</h2>
+            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-2">
               Broad types of work I do - Each category represents a different area of expertise
             </p>
           </div>
-          <div className="bg-card border border-border rounded-2xl p-8 md:p-12">
+          <div className="bg-card border border-border rounded-2xl p-4 sm:p-6 md:p-8 lg:p-12">
             <OrbitCarousel 
               images={orbitImages}
               speed={0.3}
@@ -109,7 +109,7 @@ export default function Dashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 py-8"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 py-6 sm:py-8"
         >
           {[
             { title: "Projects", value: "50+", description: "Completed projects" },
@@ -121,11 +121,11 @@ export default function Dashboard() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-              className="bg-card border border-border rounded-xl p-8 text-center hover:shadow-lg transition-shadow"
+              className="bg-card border border-border rounded-xl p-6 sm:p-8 text-center hover:shadow-lg transition-shadow"
             >
-              <div className="text-4xl font-bold text-primary mb-2">{stat.value}</div>
-              <div className="text-xl font-semibold mb-1">{stat.title}</div>
-              <div className="text-muted-foreground text-sm">{stat.description}</div>
+              <div className="text-3xl sm:text-4xl font-bold text-primary mb-2">{stat.value}</div>
+              <div className="text-lg sm:text-xl font-semibold mb-1">{stat.title}</div>
+              <div className="text-muted-foreground text-xs sm:text-sm">{stat.description}</div>
             </motion.div>
           ))}
         </motion.section>
@@ -135,10 +135,10 @@ export default function Dashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="py-12"
+          className="py-8 sm:py-10 md:py-12"
         >
-          <div className="text-center space-y-8 max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold">Connect With Me</h2>
+          <div className="text-center space-y-6 sm:space-y-8 max-w-2xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl font-bold">Connect With Me</h2>
             <div className="flex justify-center items-center pt-4">
               <MagneticDock>
                 <DockIcon

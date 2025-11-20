@@ -44,18 +44,18 @@ export default function Home() {
       />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4">
+      <section className="pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-14 md:mb-16"
           >
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent px-2">
               Welcome to My Portfolio
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-8">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-6 sm:mb-8 px-2">
               Showcasing achievements, projects, and professional experience
             </p>
             
@@ -76,21 +76,21 @@ export default function Home() {
             </motion.div>
 
             {/* Resume & Transcripts Section */}
-            <div className="flex flex-wrap justify-center gap-4 mb-12">
+            <div className="flex flex-col sm:flex-wrap sm:flex-row justify-center gap-3 sm:gap-4 mb-8 sm:mb-10 md:mb-12 px-2">
               {/* Resume */}
               <div className="flex flex-col sm:flex-row gap-2">
                 <button
                   onClick={() => handlePreview('resume.pdf')}
-                  className="flex items-center gap-2 px-6 py-3 bg-primary/10 text-primary border border-primary/20 rounded-lg hover:bg-primary/20 transition-colors"
+                  className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base bg-primary/10 text-primary border border-primary/20 rounded-lg hover:bg-primary/20 transition-colors"
                 >
-                  <Eye className="h-5 w-5" />
+                  <Eye className="h-4 w-4 sm:h-5 sm:w-5" />
                   <span>Preview Resume</span>
                 </button>
                 <button
                   onClick={() => handleDownload('resume.pdf')}
-                  className="flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+                  className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
                 >
-                  <Download className="h-5 w-5" />
+                  <Download className="h-4 w-4 sm:h-5 sm:w-5" />
                   <span>Download Resume</span>
                 </button>
               </div>
@@ -99,16 +99,16 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-2">
                 <button
                   onClick={() => handlePreview('transcripts.pdf')}
-                  className="flex items-center gap-2 px-6 py-3 bg-secondary/10 text-secondary-foreground border border-secondary/20 rounded-lg hover:bg-secondary/20 transition-colors"
+                  className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base bg-secondary/10 text-secondary-foreground border border-secondary/20 rounded-lg hover:bg-secondary/20 transition-colors"
                 >
-                  <Eye className="h-5 w-5" />
+                  <Eye className="h-4 w-4 sm:h-5 sm:w-5" />
                   <span>Preview Transcripts</span>
                 </button>
                 <button
                   onClick={() => handleDownload('transcripts.pdf')}
-                  className="flex items-center gap-2 px-6 py-3 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors"
+                  className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors"
                 >
-                  <GraduationCap className="h-5 w-5" />
+                  <GraduationCap className="h-4 w-4 sm:h-5 sm:w-5" />
                   <span>Download Transcripts</span>
                 </button>
               </div>
@@ -137,19 +137,19 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto"
           >
-            <Link href="/about" className="p-6 bg-card border border-border rounded-xl hover:shadow-lg transition-shadow">
-              <h3 className="text-2xl font-bold mb-2">About Me</h3>
-              <p className="text-muted-foreground">Learn more about my background and interests</p>
+            <Link href="/about" className="p-4 sm:p-5 md:p-6 bg-card border border-border rounded-xl hover:shadow-lg transition-shadow">
+              <h3 className="text-xl sm:text-2xl font-bold mb-2">About Me</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">Learn more about my background and interests</p>
             </Link>
-            <Link href="/projects" className="p-6 bg-card border border-border rounded-xl hover:shadow-lg transition-shadow">
-              <h3 className="text-2xl font-bold mb-2">Projects</h3>
-              <p className="text-muted-foreground">Explore my research, quant work, and projects</p>
+            <Link href="/projects" className="p-4 sm:p-5 md:p-6 bg-card border border-border rounded-xl hover:shadow-lg transition-shadow">
+              <h3 className="text-xl sm:text-2xl font-bold mb-2">Projects</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">Explore my research, quant work, and projects</p>
             </Link>
-            <Link href="/contact" className="p-6 bg-card border border-border rounded-xl hover:shadow-lg transition-shadow">
-              <h3 className="text-2xl font-bold mb-2">Let's Connect</h3>
-              <p className="text-muted-foreground">Get in touch via LinkedIn, GitHub, or email</p>
+            <Link href="/contact" className="p-4 sm:p-5 md:p-6 bg-card border border-border rounded-xl hover:shadow-lg transition-shadow sm:col-span-2 md:col-span-1">
+              <h3 className="text-xl sm:text-2xl font-bold mb-2">Let's Connect</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">Get in touch via LinkedIn, GitHub, or email</p>
             </Link>
           </motion.div>
         </div>

@@ -51,7 +51,7 @@ export default function Contact() {
   };
 
   return (
-    <main className="min-h-screen bg-background pt-32 pb-20 px-4">
+    <main className="min-h-screen bg-background pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6">
       <Navigation />
       
       <div className="max-w-4xl mx-auto">
@@ -60,27 +60,27 @@ export default function Contact() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="flex items-center gap-4 mb-12 pt-8">
-            <Mail className="h-8 w-8 text-primary" />
-            <h1 className="text-5xl font-bold">Let's Connect</h1>
+          <div className="flex items-center gap-3 sm:gap-4 mb-8 sm:mb-10 md:mb-12 pt-4 sm:pt-6 md:pt-8">
+            <Mail className="h-6 w-6 sm:h-8 sm:w-8 text-primary flex-shrink-0" />
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">Let's Connect</h1>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-10 md:mb-12">
             {/* Contact Information */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-card border border-border rounded-xl p-8"
+              className="bg-card border border-border rounded-xl p-5 sm:p-6 md:p-8"
             >
-              <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Contact Information</h2>
               
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <Mail className="h-5 w-5 text-primary" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Email</p>
-                    <a href="mailto:gnavignareddy@gmail.com" className="hover:underline">
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs sm:text-sm text-muted-foreground">Email</p>
+                    <a href="mailto:gnavignareddy@gmail.com" className="text-sm sm:text-base hover:underline break-all sm:break-normal">
                       gnavignareddy@gmail.com
                     </a>
                   </div>
@@ -122,9 +122,9 @@ export default function Contact() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="bg-card border border-border rounded-xl p-8"
+              className="bg-card border border-border rounded-xl p-5 sm:p-6 md:p-8"
             >
-              <h2 className="text-2xl font-bold mb-6">Social Links</h2>
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Social Links</h2>
               
               <div className="space-y-4">
                 {contactLinks.map((link, index) => (
@@ -151,9 +151,9 @@ export default function Contact() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="bg-card border border-border rounded-xl p-8"
+            className="bg-card border border-border rounded-xl p-5 sm:p-6 md:p-8"
           >
-            <h2 className="text-2xl font-bold mb-6">Resume & Transcripts</h2>
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Resume & Transcripts</h2>
             
             <div className="space-y-4">
               {/* Resume */}
@@ -205,9 +205,9 @@ export default function Contact() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="mt-8 bg-card border border-border rounded-xl p-8"
+            className="mt-6 sm:mt-8 bg-card border border-border rounded-xl p-5 sm:p-6 md:p-8"
           >
-            <h2 className="text-2xl font-bold mb-4">Other Platforms</h2>
+            <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Other Platforms</h2>
             <div className="flex flex-wrap gap-4">
               <a 
                 href="https://app.joinhandshake.com/profiles/acxdqr" 

@@ -124,7 +124,7 @@ export function MenuBar({ menuItems, currentPath }: MenuBarProps) {
         } to-transparent rounded-3xl z-0 pointer-events-none`}
         variants={navGlowVariants}
       />
-      <ul className="flex items-center gap-1 md:gap-2 relative z-10 flex-nowrap overflow-x-auto scrollbar-hide">
+      <ul className="flex items-center gap-0.5 sm:gap-1 md:gap-2 relative z-10 flex-nowrap overflow-x-auto scrollbar-hide">
         {menuItems.map((item) => {
           const active = isActive(item.href)
           return (
@@ -160,7 +160,7 @@ export function MenuBar({ menuItems, currentPath }: MenuBarProps) {
               />
               <motion.a
                 href={item.href}
-                className={`flex items-center gap-1 md:gap-2 px-2 md:px-4 py-2 relative z-10 bg-transparent rounded-xl whitespace-nowrap transition-all border-2 ${
+                className={`flex items-center gap-0.5 sm:gap-1 md:gap-2 px-1.5 sm:px-2 md:px-4 py-1.5 sm:py-2 relative z-10 bg-transparent rounded-xl whitespace-nowrap transition-all border-2 ${
                   active 
                     ? `text-foreground font-semibold ${getBorderColor(item.iconColor)}` 
                     : "text-muted-foreground group-hover:text-foreground border-transparent"
@@ -174,14 +174,14 @@ export function MenuBar({ menuItems, currentPath }: MenuBarProps) {
                 }`}>
                   {item.icon}
                 </span>
-                <span className={`text-xs md:text-sm whitespace-nowrap ${active ? item.iconColor : ""}`}>
+                <span className={`text-[10px] sm:text-xs md:text-sm whitespace-nowrap ${active ? item.iconColor : ""}`}>
                   {item.label}
                 </span>
               </motion.a>
               {!active && (
                 <motion.a
                   href={item.href}
-                  className="flex items-center gap-1 md:gap-2 px-2 md:px-4 py-2 absolute inset-0 z-10 bg-transparent text-muted-foreground group-hover:text-foreground transition-colors rounded-xl whitespace-nowrap"
+                  className="flex items-center gap-0.5 sm:gap-1 md:gap-2 px-1.5 sm:px-2 md:px-4 py-1.5 sm:py-2 absolute inset-0 z-10 bg-transparent text-muted-foreground group-hover:text-foreground transition-colors rounded-xl whitespace-nowrap"
                   variants={backVariants}
                   transition={sharedTransition}
                   style={{ transformStyle: "preserve-3d", transformOrigin: "center top", rotateX: 90 }}
@@ -189,7 +189,7 @@ export function MenuBar({ menuItems, currentPath }: MenuBarProps) {
                   <span className={`transition-colors duration-300 group-hover:${item.iconColor} text-foreground flex-shrink-0`}>
                     {item.icon}
                   </span>
-                  <span className="text-xs md:text-sm whitespace-nowrap">{item.label}</span>
+                  <span className="text-[10px] sm:text-xs md:text-sm whitespace-nowrap">{item.label}</span>
                 </motion.a>
               )}
             </motion.div>

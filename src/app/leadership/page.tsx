@@ -6,7 +6,7 @@ import { Users, Award, Calendar, MapPin } from "lucide-react";
 
 export default function Leadership() {
   return (
-    <main className="min-h-screen bg-background pt-32 pb-20 px-4">
+    <main className="min-h-screen bg-background pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6">
       <Navigation />
       
       <div className="max-w-6xl mx-auto">
@@ -15,12 +15,12 @@ export default function Leadership() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="flex items-center gap-4 mb-12">
-            <Users className="h-8 w-8 text-primary" />
-            <h1 className="text-5xl font-bold">Organizations & Leadership</h1>
+          <div className="flex items-center gap-3 sm:gap-4 mb-8 sm:mb-10 md:mb-12">
+            <Users className="h-6 w-6 sm:h-8 sm:w-8 text-primary flex-shrink-0" />
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">Organizations & Leadership</h1>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
             {[
               {
                 organization: "Undergraduate Student Government Tempe",
@@ -130,18 +130,18 @@ export default function Leadership() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-all hover:scale-105 flex flex-col"
+                className="bg-card border border-border rounded-xl p-4 sm:p-5 md:p-6 hover:shadow-lg transition-all hover:scale-[1.02] sm:hover:scale-105 flex flex-col"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3 flex-1">
-                    <div className="p-2 bg-primary/10 rounded-lg flex-shrink-0">
-                      <Users className="h-6 w-6 text-primary" />
+                <div className="flex items-start justify-between mb-3 sm:mb-4 gap-2">
+                  <div className="flex items-start gap-2 sm:gap-3 flex-1 min-w-0">
+                    <div className="p-1.5 sm:p-2 bg-primary/10 rounded-lg flex-shrink-0">
+                      <Users className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-xl font-bold mb-1">
+                      <h3 className="text-lg sm:text-xl font-bold mb-1 break-words">
                         {experience.organization}
                       </h3>
-                      <p className="text-muted-foreground text-sm">
+                      <p className="text-xs sm:text-sm text-muted-foreground break-words">
                         {experience.role}
                       </p>
                     </div>

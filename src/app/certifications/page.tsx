@@ -6,7 +6,7 @@ import { Award, FileText, ExternalLink, Eye, Download } from "lucide-react";
 
 export default function Certifications() {
   return (
-    <main className="min-h-screen bg-background pt-32 pb-20 px-4">
+    <main className="min-h-screen bg-background pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6">
       <Navigation />
       
       <div className="max-w-6xl mx-auto">
@@ -15,27 +15,27 @@ export default function Certifications() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="flex items-center gap-4 mb-12">
-            <Award className="h-8 w-8 text-primary" />
-            <h1 className="text-5xl font-bold">Certifications & Licenses</h1>
+          <div className="flex items-center gap-3 sm:gap-4 mb-8 sm:mb-10 md:mb-12">
+            <Award className="h-6 w-6 sm:h-8 sm:w-8 text-primary flex-shrink-0" />
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">Certifications & Licenses</h1>
           </div>
 
           {/* Certifications */}
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold mb-6 flex items-center gap-2">
-              <FileText className="h-7 w-7" />
-              Certifications
+          <div className="mb-8 sm:mb-10 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 flex items-center gap-2">
+              <FileText className="h-6 w-6 sm:h-7 sm:w-7 flex-shrink-0" />
+              <span>Certifications</span>
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {/* AWS Certified Solutions Architect - Associate */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-all hover:scale-105"
+                className="bg-card border border-border rounded-xl p-4 sm:p-5 md:p-6 hover:shadow-lg transition-all hover:scale-[1.02] sm:hover:scale-105"
               >
-                <Award className="h-8 w-8 text-primary mb-4" />
-                <h3 className="text-xl font-bold mb-2">
+                <Award className="h-6 w-6 sm:h-8 sm:w-8 text-primary mb-3 sm:mb-4 flex-shrink-0" />
+                <h3 className="text-lg sm:text-xl font-bold mb-2 break-words">
                   AWS Certified Solutions Architect - Associate
                 </h3>
                 <p className="text-muted-foreground mb-3">
@@ -50,22 +50,22 @@ export default function Certifications() {
                 <p className="text-sm text-muted-foreground mb-4">
                   Expires: Jun 2028
                 </p>
-                <div className="flex gap-2 mt-4">
+                <div className="flex flex-col sm:flex-row gap-2 mt-4">
                   <a
                     href="/certifications/AWSsolution.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-3 py-2 bg-primary/10 text-primary border border-primary/20 rounded-lg hover:bg-primary/20 transition-colors text-sm"
+                    className="flex items-center justify-center gap-2 px-3 py-2 bg-primary/10 text-primary border border-primary/20 rounded-lg hover:bg-primary/20 transition-colors text-xs sm:text-sm"
                   >
-                    <Eye className="h-4 w-4" />
+                    <Eye className="h-3 w-3 sm:h-4 sm:w-4" />
                     View
                   </a>
                   <a
                     href="/certifications/AWSsolution.pdf"
                     download
-                    className="flex items-center gap-2 px-3 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm"
+                    className="flex items-center justify-center gap-2 px-3 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-xs sm:text-sm"
                   >
-                    <Download className="h-4 w-4" />
+                    <Download className="h-3 w-3 sm:h-4 sm:w-4" />
                     Download
                   </a>
                 </div>

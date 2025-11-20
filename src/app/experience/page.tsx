@@ -6,7 +6,7 @@ import { Briefcase, MapPin, Calendar, Building2 } from "lucide-react";
 
 export default function Experience() {
   return (
-    <main className="min-h-screen bg-background pt-32 pb-20 px-4">
+    <main className="min-h-screen bg-background pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6">
       <Navigation />
       
       <div className="max-w-5xl mx-auto">
@@ -15,14 +15,14 @@ export default function Experience() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="flex items-center gap-4 mb-12">
-            <Briefcase className="h-8 w-8 text-primary" />
-            <h1 className="text-5xl font-bold">Work Experience</h1>
+          <div className="flex items-center gap-3 sm:gap-4 mb-8 sm:mb-10 md:mb-12">
+            <Briefcase className="h-6 w-6 sm:h-8 sm:w-8 text-primary flex-shrink-0" />
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">Work Experience</h1>
           </div>
 
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border"></div>
+            <div className="absolute left-4 sm:left-5 md:left-8 top-0 bottom-0 w-0.5 bg-border"></div>
 
             <div className="space-y-12">
               {[
@@ -138,29 +138,29 @@ export default function Experience() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="relative pl-20"
+                  className="relative pl-14 sm:pl-16 md:pl-20"
                 >
                   {/* Timeline dot */}
-                  <div className="absolute left-6 top-6 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
+                  <div className="absolute left-4 sm:left-5 md:left-6 top-6 w-3 h-3 sm:w-4 sm:h-4 bg-primary rounded-full border-2 sm:border-4 border-background"></div>
 
-                  <div className="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow">
-                    <div className="flex flex-wrap items-start justify-between mb-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Building2 className="h-5 w-5 text-primary" />
-                          <h3 className="text-2xl font-bold">
+                  <div className="bg-card border border-border rounded-xl p-4 sm:p-5 md:p-6 hover:shadow-lg transition-shadow">
+                    <div className="flex flex-wrap items-start justify-between mb-4 gap-2">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center gap-2 mb-2">
+                          <Building2 className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
+                          <h3 className="text-lg sm:text-xl md:text-2xl font-bold break-words">
                             {experience.title}
                           </h3>
                           {experience.type && (
-                            <span className="px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded">
+                            <span className="px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded whitespace-nowrap">
                               {experience.type}
                             </span>
                           )}
                         </div>
-                        <p className="text-lg text-primary font-semibold mb-2">
+                        <p className="text-base sm:text-lg text-primary font-semibold mb-2 break-words">
                           {experience.company}
                         </p>
-                        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4 flex-wrap">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm text-muted-foreground mb-4">
                           <div className="flex items-center gap-1">
                             <MapPin className="h-4 w-4" />
                             <span>{experience.location}</span>
@@ -174,21 +174,21 @@ export default function Experience() {
                     </div>
 
                     <div>
-                      <h4 className="font-semibold mb-3">Key Responsibilities & Achievements:</h4>
-                      <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                      <h4 className="text-sm sm:text-base font-semibold mb-2 sm:mb-3">Key Responsibilities & Achievements:</h4>
+                      <ul className="list-disc list-inside space-y-1 sm:space-y-2 text-xs sm:text-sm md:text-base text-muted-foreground">
                         {experience.responsibilities.map((responsibility, respIndex) => (
                           <li key={respIndex}>{responsibility}</li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="mt-4">
-                      <h4 className="font-semibold mb-2">Technologies & Skills:</h4>
-                      <div className="flex flex-wrap gap-2">
+                    <div className="mt-3 sm:mt-4">
+                      <h4 className="text-sm sm:text-base font-semibold mb-2">Technologies & Skills:</h4>
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2">
                         {experience.technologies.map((tech, techIndex) => (
                           <span
                             key={techIndex}
-                            className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-sm"
+                            className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-xs sm:text-sm"
                           >
                             {tech}
                           </span>
