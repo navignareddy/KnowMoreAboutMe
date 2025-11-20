@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Download, GraduationCap, ArrowRight } from "lucide-react";
+import { Download, GraduationCap, ArrowRight, Eye } from "lucide-react";
 import Link from "next/link";
 import SphereImageGrid, { type ImageData } from "@/components/sphere-image-grid";
+import { CursorHint } from "@/components/cursor-hint";
 
 const sampleImages: ImageData[] = [
   { id: "1", src: "https://picsum.photos/seed/1/400/400", alt: "Home", href: "/", label: "Home" },
@@ -20,17 +21,28 @@ const sampleImages: ImageData[] = [
 
 export default function Home() {
   const handleDownload = (file: string) => {
-    // Placeholder for download functionality
     const link = document.createElement('a');
     link.href = `/${file}`;
     link.download = file;
+    link.target = '_blank';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
+  const handlePreview = (file: string) => {
+    window.open(`/${file}`, '_blank', 'noopener,noreferrer');
+  };
+
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background relative">
+      {/* Cursor Hint */}
+      <CursorHint 
+        message="Click on the bubbles to explore sections" 
+        showDelay={2000}
+        hideAfterClick={true}
+      />
+      
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4">
         <div className="max-w-7xl mx-auto">
@@ -63,22 +75,43 @@ export default function Home() {
               </Link>
             </motion.div>
 
-            {/* Download Buttons */}
+            {/* Resume & Transcripts Section */}
             <div className="flex flex-wrap justify-center gap-4 mb-12">
-              <button
-                onClick={() => handleDownload('resume.pdf')}
-                className="flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
-              >
-                <Download className="h-5 w-5" />
-                <span>Download Resume</span>
-              </button>
-              <button
-                onClick={() => handleDownload('transcripts.pdf')}
-                className="flex items-center gap-2 px-6 py-3 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors"
-              >
-                <GraduationCap className="h-5 w-5" />
-                <span>Download Transcripts</span>
-              </button>
+              {/* Resume */}
+              <div className="flex flex-col sm:flex-row gap-2">
+                <button
+                  onClick={() => handlePreview('resume.pdf')}
+                  className="flex items-center gap-2 px-6 py-3 bg-primary/10 text-primary border border-primary/20 rounded-lg hover:bg-primary/20 transition-colors"
+                >
+                  <Eye className="h-5 w-5" />
+                  <span>Preview Resume</span>
+                </button>
+                <button
+                  onClick={() => handleDownload('resume.pdf')}
+                  className="flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+                >
+                  <Download className="h-5 w-5" />
+                  <span>Download Resume</span>
+                </button>
+              </div>
+              
+              {/* Transcripts */}
+              <div className="flex flex-col sm:flex-row gap-2">
+                <button
+                  onClick={() => handlePreview('transcripts.pdf')}
+                  className="flex items-center gap-2 px-6 py-3 bg-secondary/10 text-secondary-foreground border border-secondary/20 rounded-lg hover:bg-secondary/20 transition-colors"
+                >
+                  <Eye className="h-5 w-5" />
+                  <span>Preview Transcripts</span>
+                </button>
+                <button
+                  onClick={() => handleDownload('transcripts.pdf')}
+                  className="flex items-center gap-2 px-6 py-3 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors"
+                >
+                  <GraduationCap className="h-5 w-5" />
+                  <span>Download Transcripts</span>
+                </button>
+              </div>
             </div>
           </motion.div>
 

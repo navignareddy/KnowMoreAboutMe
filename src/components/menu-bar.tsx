@@ -83,11 +83,33 @@ const sharedTransition = {
 
 interface MenuBarProps {
   menuItems: MenuItem[]
+  currentPath?: string
 }
 
-export function MenuBar({ menuItems }: MenuBarProps) {
+export function MenuBar({ menuItems, currentPath }: MenuBarProps) {
   const { theme } = useTheme()
   const isDarkTheme = theme === "dark"
+  
+  const isActive = (href: string) => {
+    if (!currentPath) return false
+    if (href === "/") {
+      return currentPath === "/"
+    }
+    return currentPath.startsWith(href)
+  }
+  
+  const getBorderColor = (iconColor: string) => {
+    const colorMap: { [key: string]: string } = {
+      "text-blue-500": "border-blue-500",
+      "text-green-500": "border-green-500",
+      "text-purple-500": "border-purple-500",
+      "text-orange-500": "border-orange-500",
+      "text-pink-500": "border-pink-500",
+      "text-red-500": "border-red-500",
+      "text-cyan-500": "border-cyan-500",
+    }
+    return colorMap[iconColor] || "border-primary"
+  }
   return (
     <motion.nav
       className="p-2 rounded-2xl bg-gradient-to-b from-background/80 to-background/40 backdrop-blur-lg border border-border/40 shadow-lg relative overflow-hidden"
@@ -103,7 +125,9 @@ export function MenuBar({ menuItems }: MenuBarProps) {
         variants={navGlowVariants}
       />
       <ul className="flex items-center gap-1 md:gap-2 relative z-10 flex-nowrap overflow-x-auto scrollbar-hide">
-        {menuItems.map((item) => (
+        {menuItems.map((item) => {
+          const active = isActive(item.href)
+          return (
           <motion.li key={item.label} className="relative">
             <motion.div
               className="block rounded-xl overflow-visible group relative"
@@ -111,6 +135,20 @@ export function MenuBar({ menuItems }: MenuBarProps) {
               whileHover="hover"
               initial="initial"
             >
+              {/* Active state background */}
+              {active && (
+                <motion.div
+                  className="absolute inset-0 z-0 pointer-events-none"
+                  style={{
+                    background: item.gradient,
+                    opacity: 0.8,
+                    borderRadius: "16px",
+                  }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.8 }}
+                  transition={{ duration: 0.3 }}
+                />
+              )}
               <motion.div
                 className="absolute inset-0 z-0 pointer-events-none"
                 variants={glowVariants}
@@ -122,31 +160,42 @@ export function MenuBar({ menuItems }: MenuBarProps) {
               />
               <motion.a
                 href={item.href}
-                className="flex items-center gap-1 md:gap-2 px-2 md:px-4 py-2 relative z-10 bg-transparent text-muted-foreground group-hover:text-foreground transition-colors rounded-xl whitespace-nowrap"
-                variants={itemVariants}
+                className={`flex items-center gap-1 md:gap-2 px-2 md:px-4 py-2 relative z-10 bg-transparent rounded-xl whitespace-nowrap transition-all border-2 ${
+                  active 
+                    ? `text-foreground font-semibold ${getBorderColor(item.iconColor)}` 
+                    : "text-muted-foreground group-hover:text-foreground border-transparent"
+                }`}
+                variants={active ? undefined : itemVariants}
                 transition={sharedTransition}
                 style={{ transformStyle: "preserve-3d", transformOrigin: "center bottom" }}
               >
-                <span className={`transition-colors duration-300 group-hover:${item.iconColor} text-foreground flex-shrink-0`}>
+                <span className={`transition-colors duration-300 flex-shrink-0 ${
+                  active ? item.iconColor : "text-foreground"
+                }`}>
                   {item.icon}
                 </span>
-                <span className="text-xs md:text-sm whitespace-nowrap">{item.label}</span>
-              </motion.a>
-              <motion.a
-                href={item.href}
-                className="flex items-center gap-1 md:gap-2 px-2 md:px-4 py-2 absolute inset-0 z-10 bg-transparent text-muted-foreground group-hover:text-foreground transition-colors rounded-xl whitespace-nowrap"
-                variants={backVariants}
-                transition={sharedTransition}
-                style={{ transformStyle: "preserve-3d", transformOrigin: "center top", rotateX: 90 }}
-              >
-                <span className={`transition-colors duration-300 group-hover:${item.iconColor} text-foreground flex-shrink-0`}>
-                  {item.icon}
+                <span className={`text-xs md:text-sm whitespace-nowrap ${active ? item.iconColor : ""}`}>
+                  {item.label}
                 </span>
-                <span className="text-xs md:text-sm whitespace-nowrap">{item.label}</span>
               </motion.a>
+              {!active && (
+                <motion.a
+                  href={item.href}
+                  className="flex items-center gap-1 md:gap-2 px-2 md:px-4 py-2 absolute inset-0 z-10 bg-transparent text-muted-foreground group-hover:text-foreground transition-colors rounded-xl whitespace-nowrap"
+                  variants={backVariants}
+                  transition={sharedTransition}
+                  style={{ transformStyle: "preserve-3d", transformOrigin: "center top", rotateX: 90 }}
+                >
+                  <span className={`transition-colors duration-300 group-hover:${item.iconColor} text-foreground flex-shrink-0`}>
+                    {item.icon}
+                  </span>
+                  <span className="text-xs md:text-sm whitespace-nowrap">{item.label}</span>
+                </motion.a>
+              )}
             </motion.div>
           </motion.li>
-        ))}
+          )
+        })}
       </ul>
     </motion.nav>
   )

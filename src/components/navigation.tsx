@@ -3,6 +3,7 @@
 import { MenuBar, type MenuItem } from "@/components/menu-bar";
 import { ThemeToggle } from "@/components/menu-bar";
 import { Home, User, GraduationCap, Award, Code, Briefcase, BookOpen, Users, Mail } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const menuItems: MenuItem[] = [
   {
@@ -71,12 +72,14 @@ const menuItems: MenuItem[] = [
 ];
 
 export function Navigation() {
+  const pathname = usePathname();
+  
   return (
     <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-7xl px-2 md:px-4">
       <div className="flex items-center justify-center gap-2 md:gap-4">
         <div className="flex-1 min-w-0" />
         <div className="flex items-center gap-3 flex-shrink-0 min-w-0">
-          <MenuBar menuItems={menuItems} />
+          <MenuBar menuItems={menuItems} currentPath={pathname} />
           <div className="ml-2">
             <ThemeToggle />
           </div>

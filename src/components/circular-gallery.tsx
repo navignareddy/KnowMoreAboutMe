@@ -16,6 +16,7 @@ import { cn } from "@/lib/utils";
 export interface GalleryItem {
   image: string;
   text: string;
+  githubUrl?: string;
 }
 
 interface CircularGalleryProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -161,6 +162,7 @@ class Media {
   scene: Transform;
   screen: { width: number; height: number };
   text: string;
+  githubUrl?: string;
   viewport: { width: number; height: number };
   bend: number;
   textColor: string;
@@ -189,6 +191,7 @@ class Media {
     scene,
     screen,
     text,
+    githubUrl,
     viewport,
     bend,
     textColor,
@@ -204,6 +207,7 @@ class Media {
     scene: Transform;
     screen: { width: number; height: number };
     text: string;
+    githubUrl?: string;
     viewport: { width: number; height: number };
     bend: number;
     textColor: string;
@@ -219,6 +223,7 @@ class Media {
     this.scene = scene;
     this.screen = screen;
     this.text = text;
+    this.githubUrl = githubUrl;
     this.viewport = viewport;
     this.bend = bend;
     this.textColor = textColor;
@@ -259,6 +264,8 @@ class Media {
         uniform vec2 uPlaneSizes;
         uniform sampler2D tMap;
         uniform float uBorderRadius;
+        uniform float uSpeed;
+        uniform float uTime;
         varying vec2 vUv;
         float roundedBoxSDF(vec2 p, vec2 b, float r) {
           vec2 d = abs(p) - b;
@@ -274,8 +281,22 @@ class Media {
             vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
           );
           vec4 color = texture2D(tMap, uv);
+          
+          // Enhance brightness and contrast
+          float brightness = 1.1 + abs(uSpeed) * 0.1;
+          float contrast = 1.05;
+          color.rgb = ((color.rgb - 0.5) * contrast + 0.5) * brightness;
+          
+          // Add subtle gradient overlay for depth
+          float gradient = 1.0 - (vUv.y * 0.15);
+          color.rgb *= gradient;
+          
+          // Add subtle border glow
           float d = roundedBoxSDF(vUv - 0.5, vec2(0.5 - uBorderRadius), uBorderRadius);
           float edgeSmooth = 0.002;
+          float glow = smoothstep(0.0, 0.01, -d) * 0.3;
+          color.rgb += glow * vec3(1.0, 1.0, 1.0);
+          
           float alpha = 1.0 - smoothstep(-edgeSmooth, edgeSmooth, d);
           gl_FragColor = vec4(color.rgb, alpha);
         }
@@ -409,7 +430,10 @@ class App {
   boundOnWheel!: (e: WheelEvent) => void;
   boundOnTouchDown!: (e: MouseEvent | TouchEvent) => void;
   boundOnTouchMove!: (e: MouseEvent | TouchEvent) => void;
-  boundOnTouchUp!: () => void;
+  boundOnTouchUp!: (e?: MouseEvent | TouchEvent) => void;
+  boundOnClick!: (e: MouseEvent) => void;
+  dragStartX: number = 0;
+  dragThreshold: number = 5;
 
   constructor(
     container: HTMLElement,
@@ -505,6 +529,7 @@ class App {
         scene: this.scene,
         screen: this.screen,
         text: data.text,
+        githubUrl: data.githubUrl,
         viewport: this.viewport,
         bend,
         textColor,
@@ -518,6 +543,40 @@ class App {
     this.isDown = true;
     this.scroll.position = this.scroll.current;
     this.start = "touches" in e ? e.touches[0].clientX : e.clientX;
+    this.dragStartX = this.start;
+  }
+
+  handleClick(e: MouseEvent) {
+    if (!this.medias || this.medias.length === 0) return;
+    
+    const rect = this.container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    
+    // Find which media item is at the click position
+    const centerX = this.screen.width / 2;
+    const relativeX = x - centerX;
+    
+    // Find the closest media item using actual plane positions
+    let closestMedia: Media | null = null;
+    let minDistance = Infinity;
+    
+    for (const media of this.medias) {
+      // Media position is already calculated in update() with scroll offset
+      const mediaCenterX = media.plane.position.x;
+      const distance = Math.abs(mediaCenterX - relativeX);
+      
+      // Check if click is within the media item's bounds (roughly)
+      const mediaWidth = media.plane.scale.x;
+      if (distance < mediaWidth / 2 && distance < minDistance) {
+        minDistance = distance;
+        closestMedia = media;
+      }
+    }
+    
+    // Open GitHub link if available
+    if (closestMedia && closestMedia.githubUrl) {
+      window.open(closestMedia.githubUrl, "_blank", "noopener,noreferrer");
+    }
   }
 
   onTouchMove(e: MouseEvent | TouchEvent) {
@@ -527,7 +586,16 @@ class App {
     this.scroll.target = (this.scroll as any).position + distance;
   }
 
-  onTouchUp() {
+  onTouchUp(e?: MouseEvent | TouchEvent) {
+    if (this.isDown && e && "clientX" in e) {
+      const endX = e.clientX;
+      const dragDistance = Math.abs(endX - this.dragStartX);
+      
+      // Only treat as click if drag distance is small
+      if (dragDistance < this.dragThreshold) {
+        this.handleClick(e as MouseEvent);
+      }
+    }
     this.isDown = false;
     this.onCheck();
   }
@@ -591,10 +659,10 @@ class App {
     window.addEventListener("wheel", this.boundOnWheel);
     this.container.addEventListener("mousedown", this.boundOnTouchDown);
     window.addEventListener("mousemove", this.boundOnTouchMove);
-    window.addEventListener("mouseup", this.boundOnTouchUp);
+    window.addEventListener("mouseup", (e) => this.boundOnTouchUp(e));
     this.container.addEventListener("touchstart", this.boundOnTouchDown);
     window.addEventListener("touchmove", this.boundOnTouchMove);
-    window.addEventListener("touchend", this.boundOnTouchUp);
+    window.addEventListener("touchend", (e) => this.boundOnTouchUp(e));
   }
 
   destroy() {
@@ -651,7 +719,7 @@ const CircularGallery = ({
     <div
       ref={containerRef}
       className={cn(
-        "w-full h-full overflow-hidden cursor-grab active:cursor-grabbing",
+        "w-full h-full overflow-hidden cursor-pointer",
         "text-foreground font-bold text-[30px]",
         fontClassName,
         className,

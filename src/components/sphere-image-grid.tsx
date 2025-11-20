@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export interface Position3D {
   x: number;
@@ -106,9 +108,12 @@ const SphereImageGrid: React.FC<SphereImageGridProps> = ({
   const [selectedImage, setSelectedImage] = useState<ImageData | null>(null);
   const [imagePositions, setImagePositions] = useState<SphericalPosition[]>([]);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [clickedIndex, setClickedIndex] = useState<number | null>(null);
+  const [isNavigating, setIsNavigating] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const lastMousePos = useRef<MousePosition>({ x: 0, y: 0 });
   const animationFrame = useRef<number | null>(null);
+  const router = useRouter();
 
   const actualSphereRadius = sphereRadius || containerSize * 0.5;
   const baseImageSize = containerSize * baseImageScale;
@@ -379,11 +384,27 @@ const SphereImageGrid: React.FC<SphereImageGridProps> = ({
 
     const imageSize = baseImageSize * position.scale;
     const isHovered = hoveredIndex === index;
-    const finalScale = isHovered ? Math.min(1.2, 1.2 / position.scale) : 1;
+    const isClicked = clickedIndex === index;
+    const baseScale = isHovered ? Math.min(1.2, 1.2 / position.scale) : 1;
+    const finalScale = isClicked ? baseScale * 0.9 : baseScale;
 
     const handleClick = (e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
       if (image.href) {
-        window.location.href = image.href;
+        setClickedIndex(index);
+        setIsNavigating(true);
+        
+        // Add smooth transition effect with visual feedback
+        setTimeout(() => {
+          router.push(image.href);
+          // Reset states after navigation
+          setTimeout(() => {
+            setClickedIndex(null);
+            setIsNavigating(false);
+          }, 500);
+        }, 300);
       } else {
         setSelectedImage(image);
       }
@@ -392,40 +413,73 @@ const SphereImageGrid: React.FC<SphereImageGridProps> = ({
     return (
       <div
         key={image.id}
-        className="absolute cursor-pointer select-none transition-transform duration-200 ease-out group"
+        className="absolute cursor-pointer select-none transition-all duration-300 ease-out group"
         style={{
           width: `${imageSize}px`,
           height: `${imageSize}px`,
           left: `${containerSize/2 + position.x}px`,
           top: `${containerSize/2 + position.y}px`,
-          opacity: position.fadeOpacity,
+          opacity: isNavigating && !isClicked ? position.fadeOpacity * 0.5 : position.fadeOpacity,
           transform: `translate(-50%, -50%) scale(${finalScale})`,
-          zIndex: position.zIndex
+          zIndex: position.zIndex,
+          filter: isHovered ? 'brightness(1.1)' : isClicked ? 'brightness(0.9)' : 'brightness(1)',
         }}
-        onMouseEnter={() => setHoveredIndex(index)}
+        onMouseEnter={() => !isNavigating && setHoveredIndex(index)}
         onMouseLeave={() => setHoveredIndex(null)}
         onClick={handleClick}
       >
-        <div className="relative w-full h-full rounded-full overflow-hidden shadow-lg border-2 border-white/20">
+        <div className={`relative w-full h-full rounded-full overflow-hidden shadow-lg border-2 transition-all duration-300 ${
+          isHovered ? 'border-white/40 shadow-2xl' : 'border-white/20'
+        } ${isClicked ? 'ring-4 ring-primary/50' : ''}`}>
           <img
             src={image.src}
             alt={image.alt}
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-cover transition-transform duration-300 ${
+              isHovered ? 'scale-110' : 'scale-100'
+            }`}
             draggable={false}
             loading={index < 3 ? 'eager' : 'lazy'}
           />
+        {/* Click Ripple Effect */}
+        {isClicked && (
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0.5 }}
+            animate={{ scale: 1.5, opacity: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="absolute inset-0 rounded-full bg-primary/40 pointer-events-none"
+          />
+        )}
+        {/* Hover Glow Effect */}
+        {isHovered && !isClicked && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="absolute inset-0 rounded-full bg-white/10 pointer-events-none"
+          />
+        )}
         </div>
         {/* Hover Label */}
-        {isHovered && image.label && (
-          <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap pointer-events-none z-50">
-            <div className="px-3 py-1.5 bg-black/80 backdrop-blur-sm text-white text-sm font-medium rounded-lg shadow-lg">
-              {image.label}
-            </div>
-          </div>
-        )}
+        <AnimatePresence>
+          {isHovered && image.label && (
+            <motion.div
+              initial={{ opacity: 0, y: 5, scale: 0.8 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 5, scale: 0.8 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 whitespace-nowrap pointer-events-none z-50"
+            >
+              <div className="px-4 py-2 bg-black/90 backdrop-blur-md text-white text-sm font-medium rounded-lg shadow-xl border border-white/20">
+                {image.label}
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/90"></div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     );
-  }, [worldPositions, baseImageSize, containerSize, hoveredIndex]);
+  }, [worldPositions, baseImageSize, containerSize, hoveredIndex, clickedIndex, isNavigating, router]);
 
   const renderSpotlightModal = () => {
     if (!selectedImage) return null;

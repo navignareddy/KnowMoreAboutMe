@@ -2,61 +2,95 @@
 
 import { Navigation } from "@/components/navigation";
 import { motion } from "framer-motion";
-import { Code, Database, Cloud, GitBranch, Palette, Languages } from "lucide-react";
+import { Code, Database, Cloud, Brain, BarChart3, Layers, Palette, Briefcase, FileCode } from "lucide-react";
 
 const skillCategories = [
   {
     icon: <Code className="h-6 w-6" />,
     title: "Programming Languages",
+    color: "text-blue-500",
     skills: [
-      { name: "[Language 1]", level: 90 },
-      { name: "[Language 2]", level: 85 },
-      { name: "[Language 3]", level: 80 },
-      { name: "[Language 4]", level: 75 },
+      "Python", "Java", "C++", "JavaScript", "SQL", "Julia", 
+      "C#", "Kotlin", "Go (Beginner)", "Bash", "HTML", "CSS"
     ],
   },
   {
-    icon: <Database className="h-6 w-6" />,
-    title: "Databases",
+    icon: <Brain className="h-6 w-6" />,
+    title: "Machine Learning & AI",
+    color: "text-purple-500",
     skills: [
-      { name: "[Database 1]", level: 85 },
-      { name: "[Database 2]", level: 80 },
-      { name: "[Database 3]", level: 70 },
+      "PyTorch", "TensorFlow", "scikit-learn", "LLMs", "LangChain", 
+      "Time Series Forecasting", "NLP", "Generative Models", 
+      "Data Preprocessing", "Feature Engineering", "Cross-Validation", 
+      "Model Evaluation"
+    ],
+  },
+  {
+    icon: <BarChart3 className="h-6 w-6" />,
+    title: "Data Science & Analytics",
+    color: "text-green-500",
+    skills: [
+      "NumPy", "pandas", "SciPy", "statsmodels", "Probability", 
+      "Hypothesis Testing", "Regression", "Time Series (ARIMA/GARCH)", 
+      "Optimization", "Linear Algebra", "R", "Data Visualization", 
+      "Forecasting", "KPI Analysis"
+    ],
+  },
+  {
+    icon: <Layers className="h-6 w-6" />,
+    title: "Frameworks & Libraries",
+    color: "text-orange-500",
+    skills: [
+      "FastAPI", "Spring Boot", "Node.js", "React", "Flask", 
+      "JavaFX", "Django"
     ],
   },
   {
     icon: <Cloud className="h-6 w-6" />,
     title: "Cloud & DevOps",
+    color: "text-cyan-500",
     skills: [
-      { name: "[Cloud Platform 1]", level: 80 },
-      { name: "[Cloud Platform 2]", level: 75 },
-      { name: "[Tool 1]", level: 85 },
+      "AWS (EC2, S3, Lambda)", "GCP", "Docker", "Kubernetes", 
+      "Jenkins", "CI/CD", "REST APIs", "Linux", "Git/GitHub", 
+      "Hadoop", "Spark", "Parallel Computing"
     ],
   },
   {
-    icon: <GitBranch className="h-6 w-6" />,
-    title: "Frameworks & Libraries",
+    icon: <Database className="h-6 w-6" />,
+    title: "Databases & Storage",
+    color: "text-pink-500",
     skills: [
-      { name: "[Framework 1]", level: 90 },
-      { name: "[Framework 2]", level: 85 },
-      { name: "[Library 1]", level: 80 },
+      "PostgreSQL", "MySQL", "MongoDB", "Redis", "H2", 
+      "Firebase", "ChromaDB"
+    ],
+  },
+  {
+    icon: <FileCode className="h-6 w-6" />,
+    title: "Data & Visualization Tools",
+    color: "text-yellow-500",
+    skills: [
+      "Jupyter", "JupyterLab", "Matplotlib", "Plotly", 
+      "Tableau", "Power BI"
+    ],
+  },
+  {
+    icon: <Briefcase className="h-6 w-6" />,
+    title: "Business & Management Tools",
+    color: "text-indigo-500",
+    skills: [
+      "Excel (Advanced)", "Salesforce", "QuickBooks", "Asana", 
+      "Trello", "Google Analytics", "SEO", "Budgeting", 
+      "Operations Management", "Market Research", "Risk Assessment", 
+      "Product Roadmapping", "UX Research"
     ],
   },
   {
     icon: <Palette className="h-6 w-6" />,
-    title: "Design & UI/UX",
+    title: "Research & Development Tools",
+    color: "text-red-500",
     skills: [
-      { name: "[Design Tool 1]", level: 80 },
-      { name: "[Design Tool 2]", level: 75 },
-    ],
-  },
-  {
-    icon: <Languages className="h-6 w-6" />,
-    title: "Languages",
-    skills: [
-      { name: "[Language 1]", level: 100 },
-      { name: "[Language 2]", level: 95 },
-      { name: "[Language 3]", level: 80 },
+      "LaTeX", "UML", "Agile Methodology", "OAuth 2.0", 
+      "Microservice Architecture"
     ],
   },
 ];
@@ -77,36 +111,31 @@ export default function Skills() {
             <h1 className="text-5xl font-bold">Technical Skills</h1>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {skillCategories.map((category, categoryIndex) => (
               <motion.div
                 key={categoryIndex}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
-                className="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow"
+                className="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-all hover:scale-105"
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="text-primary">{category.icon}</div>
-                  <h2 className="text-2xl font-bold">{category.title}</h2>
+                  <div className={category.color || "text-primary"}>{category.icon}</div>
+                  <h2 className="text-xl font-bold">{category.title}</h2>
                 </div>
                 
-                <div className="space-y-4">
+                <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex}>
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="font-medium">{skill.name}</span>
-                        <span className="text-sm text-muted-foreground">{skill.level}%</span>
-                      </div>
-                      <div className="w-full bg-secondary rounded-full h-2.5">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: `${skill.level}%` }}
-                          transition={{ duration: 1, delay: categoryIndex * 0.1 + skillIndex * 0.1 }}
-                          className="bg-primary h-2.5 rounded-full"
-                        />
-                      </div>
-                    </div>
+                    <motion.span
+                      key={skillIndex}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, delay: categoryIndex * 0.1 + skillIndex * 0.02 }}
+                      className="px-3 py-1.5 bg-primary/10 text-primary border border-primary/20 rounded-lg text-sm font-medium hover:bg-primary/20 transition-colors"
+                    >
+                      {skill}
+                    </motion.span>
                   ))}
                 </div>
               </motion.div>

@@ -8,21 +8,77 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Twitter, Mail, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
+/**
+ * PROJECT CATEGORIES (Orbit Carousel)
+ * 
+ * Four main categories of work:
+ * - Research: Academic research, papers, studies
+ * - Quant: Quantitative projects, financial models, algorithmic trading
+ * - Personal Projects: Personal web/app development projects
+ * - Academic Projects: Coursework, academic assignments, university projects
+ */
 const orbitImages = [
-  { id: 1, url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop", label: "Research Work" },
-  { id: 2, url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop", label: "Quant Projects" },
-  { id: 3, url: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop", label: "Web Development" },
-  { id: 4, url: "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=400&fit=crop", label: "Data Science" },
-  { id: 5, url: "https://images.unsplash.com/photo-1760341332217-e6c24d1e142c?w=400&h=400&fit=crop", label: "Machine Learning" },
-  { id: 6, url: "https://images.unsplash.com/photo-1495567720989-cebdbdd97913?w=400&h=400&fit=crop", label: "Innovation" },
+  { 
+    id: 1, 
+    url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=400&fit=crop&q=80", 
+    label: "Research", // Academic research, papers, studies
+    category: "research"
+  },
+  { 
+    id: 2, 
+    url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=400&fit=crop&q=80", 
+    label: "Quant", // Financial modeling, algorithmic trading, quantitative analysis
+    category: "quant"
+  },
+  { 
+    id: 3, 
+    url: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=400&fit=crop&q=80", 
+    label: "Personal Projects", // Personal web/app development, side projects
+    category: "personal"
+  },
+  { 
+    id: 4, 
+    url: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=400&fit=crop&q=80", 
+    label: "Academic Projects", // Coursework, university assignments, academic projects
+    category: "academic"
+  },
 ];
 
+/**
+ * FEATURED PROJECTS (Circular Gallery)
+ * 
+ * Specific projects with GitHub links.
+ * Each item should have:
+ * - image: Screenshot or visual representation of the project
+ * - text: Project name
+ * - githubUrl: GitHub repository URL (will open on click)
+ */
 const galleryItems = [
-  { image: "https://picsum.photos/seed/1/800/600", text: "Featured Project 1" },
-  { image: "https://picsum.photos/seed/2/800/600", text: "Featured Project 2" },
-  { image: "https://picsum.photos/seed/3/800/600", text: "Featured Project 3" },
-  { image: "https://picsum.photos/seed/4/800/600", text: "Featured Project 4" },
-  { image: "https://picsum.photos/seed/5/800/600", text: "Featured Project 5" },
+  { 
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop", 
+    text: "[Replace: Project Name 1]",
+    githubUrl: "https://github.com/yourusername/project1" // Replace with actual GitHub URL
+  },
+  { 
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop", 
+    text: "[Replace: Project Name 2]",
+    githubUrl: "https://github.com/yourusername/project2" // Replace with actual GitHub URL
+  },
+  { 
+    image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop", 
+    text: "[Replace: Project Name 3]",
+    githubUrl: "https://github.com/yourusername/project3" // Replace with actual GitHub URL
+  },
+  { 
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop", 
+    text: "[Replace: Project Name 4]",
+    githubUrl: "https://github.com/yourusername/project4" // Replace with actual GitHub URL
+  },
+  { 
+    image: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=800&h=600&fit=crop", 
+    text: "[Replace: Project Name 5]",
+    githubUrl: "https://github.com/yourusername/project5" // Replace with actual GitHub URL
+  },
 ];
 
 export default function Dashboard() {
@@ -68,10 +124,22 @@ export default function Dashboard() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="py-8"
         >
-          <h2 className="text-3xl font-bold text-center mb-12">Project Categories</h2>
-          <div className="bg-card border border-border rounded-2xl p-8 md:p-12">
-            <OrbitCarousel images={orbitImages} />
+          <div className="text-center mb-6">
+            <h2 className="text-3xl font-bold mb-3">Project Categories</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Broad types of work I do - Each category represents a different area of expertise
+            </p>
           </div>
+          <div className="bg-card border border-border rounded-2xl p-8 md:p-12">
+            <OrbitCarousel 
+              images={orbitImages}
+              speed={0.3}
+              imageSize={200}
+            />
+          </div>
+          <p className="text-sm text-muted-foreground text-center mt-4 italic">
+            💡 Tip: Click on any category to explore related projects
+          </p>
         </motion.section>
 
         {/* Circular Gallery - Featured Projects */}
@@ -81,18 +149,34 @@ export default function Dashboard() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="py-8"
         >
-          <h2 className="text-3xl font-bold text-center mb-12">Featured Projects</h2>
-          <div className="bg-card border border-border rounded-2xl overflow-hidden">
-            <div className="h-[600px]">
+          <div className="text-center mb-6">
+            <h2 className="text-3xl font-bold mb-3">Featured Projects</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Specific projects I've completed - Real work with actual results and screenshots
+            </p>
+          </div>
+          <div className="bg-gradient-to-br from-background via-card/30 to-background border border-border/50 rounded-2xl overflow-hidden shadow-2xl relative">
+            {/* Decorative gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 pointer-events-none z-10" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/10 to-transparent pointer-events-none z-10" />
+            
+            <div className="h-[600px] relative z-0">
               <CircularGallery
                 items={galleryItems}
                 bend={3}
                 borderRadius={0.05}
                 scrollSpeed={2}
                 scrollEase={0.05}
+                className="relative"
               />
             </div>
+            
+            {/* Subtle border glow effect */}
+            <div className="absolute inset-0 rounded-2xl border border-white/5 pointer-events-none z-10" />
           </div>
+          <p className="text-sm text-muted-foreground text-center mt-4 italic">
+            💡 Tip: Click on any project to view it on GitHub • Scroll horizontally to browse
+          </p>
         </motion.section>
 
         {/* Quick Stats */}
